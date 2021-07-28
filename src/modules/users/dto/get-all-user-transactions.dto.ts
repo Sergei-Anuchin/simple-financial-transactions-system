@@ -1,8 +1,9 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { Field, ObjectType } from '@nestjs/graphql';
+
 import { Transaction } from '../../transactions/transaction.entity'
 
 @ObjectType()
-export class AllUserTransactionsDto {
+export class GetAllUserTransactionsDto {
     @Field(type => [Transaction])
     readonly sourceTransactions: Transaction[];
 

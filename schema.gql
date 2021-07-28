@@ -2,6 +2,12 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type User {
+  id: Int!
+  firstName: String!
+  lastName: String!
+}
+
 type Transaction {
   id: Int!
   sourceAccountId: Int!
@@ -15,26 +21,20 @@ type Account {
   balance: Float!
 }
 
-type User {
-  id: Int!
-  firstName: String!
-  lastName: String!
-}
-
-type TotalUserBalanceDto {
+type GetTotalUserBalanceDto {
   totalUserBalance: Int!
 }
 
-type AllUserTransactionsDto {
+type GetAllUserTransactionsDto {
   sourceTransactions: [Transaction!]!
   targetTransactions: [Transaction!]!
 }
 
 type Query {
   getUserAccounts(userId: Int!): [Account]!
-  getTotalUserBalance(id: Int!): TotalUserBalanceDto!
+  getTotalUserBalance(id: Int!): GetTotalUserBalanceDto!
   getUsers: [User]!
-  getUserTransactions(id: Int!): AllUserTransactionsDto!
+  getUserTransactions(id: Int!): GetAllUserTransactionsDto!
 }
 
 type Mutation {

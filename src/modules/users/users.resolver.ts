@@ -1,14 +1,15 @@
 import { Resolver, Query, Args, Int } from '@nestjs/graphql';
+
+import { GetTotalUserBalanceDto } from './dto/get-total-user-balance.dto';
+import { GetAllUserTransactionsDto } from './dto/get-all-user-transactions.dto';
 import { UsersService } from './users.service';
 import { User } from './user.entity';
-import { TotalUserBalanceDto } from './dto/totalUserBalance.dto';
-import { AllUserTransactionsDto } from './dto/allUserTransactions.dto';
 
 @Resolver(() => User)
 export class UsersResolver {
     constructor(private readonly usersService: UsersService) {}
 
-    @Query(() => TotalUserBalanceDto, { name: 'getTotalUserBalance' })
+    @Query(() => GetTotalUserBalanceDto, { name: 'getTotalUserBalance' })
     async getTotalUserBalance(@Args('id', { type: () => Int }) id: number) {
         return this.usersService.getTotalBalanceById(id);
     }
@@ -18,7 +19,7 @@ export class UsersResolver {
         return this.usersService.getAll();
     }
 
-    @Query(() => AllUserTransactionsDto, { name: 'getUserTransactions', nullable: false })
+    @Query(() => GetAllUserTransactionsDto, { name: 'getUserTransactions', nullable: false })
     async getUserTransactions(@Args('id', { type: () => Int }) id: number) {
         return this.usersService.getUserTransactions(id);
     }

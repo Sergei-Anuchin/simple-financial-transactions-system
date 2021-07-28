@@ -1,11 +1,13 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User } from './user.entity';
+
 import { AccountsService } from '../accounts/accounts.service';
 import { TransactionsService } from '../transactions/transactions.service';
-import { TotalUserBalanceDto } from './dto/totalUserBalance.dto';
-import { AllUserTransactionsDto } from './dto/allUserTransactions.dto';
+
+import { GetTotalUserBalanceDto } from './dto/get-total-user-balance.dto';
+import { GetAllUserTransactionsDto } from './dto/get-all-user-transactions.dto';
+import { User } from './user.entity';
 
 @Injectable()
 export class UsersService {
@@ -29,14 +31,14 @@ export class UsersService {
     return this.usersRepository.find();
   }
 
-  async getTotalBalanceById(id: number): Promise<TotalUserBalanceDto> {
+  async getTotalBalanceById(id: number): Promise<GetTotalUserBalanceDto> {
     await this.checkIfUserByIdExistsAndGetHim(id);
 
     const totalUserBalance = await this.accountsService.getTotalUserBalance(id);
     return { totalUserBalance };
   }
 
-  async getUserTransactions(id: number): Promise<AllUserTransactionsDto> {
+  async getUserTransactions(id: number): Promise<GetAllUserTransactionsDto> {
     await this.checkIfUserByIdExistsAndGetHim(id);
 
     const accountIds = await this.accountsService.getUserAccountIds(id);

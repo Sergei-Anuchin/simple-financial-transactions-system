@@ -1,8 +1,9 @@
 import { Injectable, HttpException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Account } from './account.entity';
 import { StatusCodes } from 'http-status-codes';
+
+import { Account } from './account.entity';
 
 @Injectable()
 export class AccountsService {

@@ -1,34 +1,17 @@
-import { Injectable, NotFoundException, HttpException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, In, getManager, EntityManager } from 'typeorm';
-import { StatusCodes } from 'http-status-codes';
 
-import { Transaction } from './transaction.entity';
 import { Account } from '../accounts/account.entity';
-import { CreateTransactionDto } from './dto/create-transaction.dto';
 import { AccountsService } from '../accounts/accounts.service';
 
-const throwBadRequest = message => {
-  throw new HttpException({
-    status: StatusCodes.BAD_REQUEST,
-    error: message,
-  }, StatusCodes.BAD_REQUEST);
-}
-const throwIfSourceAndTargetAccountsMatch = ({ sourceAccountId, targetAccountId }) => {
-  if (sourceAccountId === targetAccountId) {
-    throwBadRequest('Source and target accounts should not match');
-  }
-}
-const throwIfSumIsNotPositive = sum => {
-  if (sum < 0) {
-    throwBadRequest('Sum should be positive');
-  }
-}
-const throwIfBalanceHasInsufficientFunds = (balance, sum) => {
-  if (balance < sum) {
-    throwBadRequest('Source account has insufficient funds');
-  }
-}
+import { CreateTransactionDto } from './dto/create-transaction.dto';
+import { Transaction } from './transaction.entity';
+import {
+  throwIfSourceAndTargetAccountsMatch,
+  throwIfSumIsNotPositive,
+  throwIfBalanceHasInsufficientFunds,
+} from './transactions.utils';
 
 @Injectable()
 export class TransactionsService {

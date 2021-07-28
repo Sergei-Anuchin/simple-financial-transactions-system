@@ -1,12 +1,14 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UsersResolver } from './users.resolver';
-import { UsersService } from './users.service';
-import { User } from './user.entity';
+
 import { AccountsModule } from '../accounts/accounts.module';
 import { AccountsService } from '../accounts/accounts.service';
 import { TransactionsModule } from '../transactions/transactions.module';
 import { TransactionsService } from '../transactions/transactions.service';
+
+import { UsersResolver } from './users.resolver';
+import { UsersService } from './users.service';
+import { User } from './user.entity';
 
 @Module({
   imports: [
