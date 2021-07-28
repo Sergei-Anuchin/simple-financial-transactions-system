@@ -1,0 +1,48 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Transaction {
+  id: Int!
+  sourceAccountId: Int!
+  targetAccountId: Int!
+  sum: Float!
+}
+
+type Account {
+  id: Int!
+  userId: Int!
+  balance: Float!
+}
+
+type User {
+  id: Int!
+  firstName: String!
+  lastName: String!
+}
+
+type TotalUserBalanceDto {
+  totalUserBalance: Int!
+}
+
+type AllUserTransactionsDto {
+  sourceTransactions: [Transaction!]!
+  targetTransactions: [Transaction!]!
+}
+
+type Query {
+  getUserAccounts(userId: Int!): [Account]!
+  getTotalUserBalance(id: Int!): TotalUserBalanceDto!
+  getUsers: [User]!
+  getUserTransactions(id: Int!): AllUserTransactionsDto!
+}
+
+type Mutation {
+  createTransaction(createTransactionData: CreateTransactionDto!): Transaction!
+}
+
+input CreateTransactionDto {
+  sourceAccountId: Float!
+  targetAccountId: Float!
+  sum: Float!
+}
